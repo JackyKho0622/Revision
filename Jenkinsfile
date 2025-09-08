@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    triggers {
+        githubPush()   // 👈 allows GitHub webhook to trigger pipeline
+    }
     stages{
         stage('Checkout'){
             steps{
@@ -8,12 +11,12 @@ pipeline {
         }
         stage('Build'){
             steps{
-                bat 'gradlew build'
+                bat 'gradlew.bat build'
             }
         }
         stage('Test'){
             steps{
-                bat 'gradlew RunTest'
+                bat 'gradlew.bat RunTest'
             }
         }
         stage('Deploy'){
