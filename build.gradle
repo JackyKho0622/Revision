@@ -1,0 +1,39 @@
+// Apply the Java plugin to add support for Java
+plugins {
+    id 'java'
+}
+
+// Set the version of the project
+version '1.0'
+
+// Use Maven Central repository to fetch dependencies
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Add Junit dependency for testing
+    testImplementation 'junit:junit:4.13.2'
+}
+
+// Define a custom task to run tests
+task RunTest(type: Test) {
+    // Specify the test classes and classpath
+    testClassesDirs = sourceSets.test.output.testClassesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    // Configure test logging to show passed, skipped, and failed tests
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+// Define a custom task to build a JAR file
+task BuildJar (type: Jar){
+    manifest {
+        attributes "Main-Class": "App"  // Specify the main class for the JAR
+    }
+
+    from sourceSets.main.output  // Include the compiled classes in the JAR
+    archiveBaseName = "my-application"  // Name of the output JAR file
+    destinationDirectory = file("build/libs")  // Output directory for the JAR file
+}
