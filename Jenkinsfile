@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Checkout'){
             steps{
-                git branch: 'main', url: 'https://github.com/JackyKho0622/Revision'
+                git branch: 'main', url: 'https://github.com/JackyKho0622/Revision.git'
             }
         }
         stage('Build'){
